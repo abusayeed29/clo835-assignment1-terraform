@@ -1,52 +1,22 @@
-# Amazon Linux 2023 AMI
-data "aws_ami" "amazon_linux_2023" {
-  most_recent = true
-  owners      = ["amazon"]
+resource "aws_instance" "app" {
+  ami           = var.ami_id
+  instance_type = var.instance_type
+  key_name      = var.key_name
 
-  filter {
-    name   = "name"
-    values = ["al2023-ami-*-x86_64"]
-  }
+  vpc_security_group_ids = [var.security_group_id]
 
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
-  }
-
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
-
-resource "aws_instance" "this" {
-  ami                         = data.aws_ami.amazon_linux_2023.id
-  instance_type               = var.instance_type
-  subnet_id                   = var.subnet_id
-  vpc_security_group_ids      = [var.security_group_id]
-  key_name                    = var.key_name
-  iam_instance_profile        = var.instance_profile_name
-  associate_public_ip_address = true
+  iam_instance_profile = var.iam_instance_profile
 
   user_data = <<-EOF
-              #!/bin/bash
-              set -e
-
-              dnf update -y
-              dnf install -y docker git
-
-              systemctl enable docker
-              systemctl start docker
-              usermod -aG docker ec2-user
-              EOF
+    #!/bin/bash
+    yum update -y
+    yum install -y docker
+    systemctl start docker
+    systemctl enable docker
+    usermod -aG docker ec2-user
+  EOF
 
   tags = {
-    Name    = "${var.project_name}-ec2"
-    Project = var.project_name
+    Name = var.instance_name
   }
 }

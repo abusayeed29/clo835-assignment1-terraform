@@ -1,4 +1,3 @@
-output "security_group_id" {
-  description = "Security group ID"
-  value       = aws_security_group.this.id
+output "sg_id" {
+  value = aws_security_group.app_sg.id
 }

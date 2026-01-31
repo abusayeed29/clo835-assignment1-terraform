@@ -1,29 +1,23 @@
-variable "project_name" {
-  type        = string
-  description = "Project name for naming/tags"
+variable "ami_id" {
+  type = string
 }
 
 variable "instance_type" {
-  type        = string
-  description = "EC2 instance type"
+  type = string
 }
 
 variable "key_name" {
-  type        = string
-  description = "Existing EC2 key pair name"
-}
-
-variable "subnet_id" {
-  type        = string
-  description = "Public subnet ID (default VPC)"
+  type = string
 }
 
 variable "security_group_id" {
-  type        = string
-  description = "Security group ID for EC2"
+  type = string
 }
 
-variable "instance_profile_name" {
-  type        = string
-  description = "IAM instance profile name"
+variable "iam_instance_profile" {
+  type = string
+}
+
+variable "instance_name" {
+  type = string
 }

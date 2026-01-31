@@ -1,9 +1,7 @@
-variable "project_name" {
-  type        = string
-  description = "Project name for tagging"
+variable "app_repo_name" {
+  type = string
 }
 
-variable "repos" {
-  type        = list(string)
-  description = "List of ECR repository names to create"
+variable "mysql_repo_name" {
+  type = string
 }

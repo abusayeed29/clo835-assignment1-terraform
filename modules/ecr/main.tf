@@ -1,15 +1,11 @@
-resource "aws_ecr_repository" "this" {
-  for_each = toset(var.repos)
-
-  name                 = each.value
+resource "aws_ecr_repository" "app" {
+  name                 = var.app_repo_name
   image_tag_mutability = "MUTABLE"
+  force_delete         = true
+}
 
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-
-  tags = {
-    Name    = each.value
-    Project = var.project_name
-  }
+resource "aws_ecr_repository" "mysql" {
+  name                 = var.mysql_repo_name
+  image_tag_mutability = "MUTABLE"
+  force_delete         = true
 }

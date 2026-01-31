@@ -1,19 +1,18 @@
-output "default_vpc_id" {
-  description = "Default VPC ID"
-  value       = data.aws_vpc.default.id
-}
-
-output "ecr_repository_urls" {
-  description = "Map of repo name -> ECR repository URL"
-  value       = module.ecr.repository_urls
-}
-
 output "ec2_public_ip" {
-  description = "EC2 public IP"
+  description = "Public IP of the EC2 instance"
   value       = module.ec2.public_ip
 }
 
-output "ec2_public_dns" {
-  description = "EC2 public DNS"
-  value       = module.ec2.public_dns
+output "ecr_app_url" {
+  description = "ECR repository URL for app"
+  value       = module.ecr.app_repo_url
+}
+
+output "ecr_mysql_url" {
+  description = "ECR repository URL for mysql"
+  value       = module.ecr.mysql_repo_url
+}
+
+output "aws_region" {
+  value = var.aws_region
 }
