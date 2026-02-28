@@ -9,3 +9,7 @@ variable "sg_description" {
 variable "ssh_cidr" {
   type = string
 }
+
+variable "app_cidr" {
+  type = string
+}
